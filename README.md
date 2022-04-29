@@ -1,7 +1,7 @@
-# AI-DTR-algorithm
+# AI-ID3/c4.5-algorithm
 
 ### Description
-Prototype of DTR AI generating rules algorithm.
+Prototype of ID3/c4.5 generating trees.
 
 ### Status
 
