@@ -30,5 +30,5 @@ def countItems(array):
             result[item] = 1
         else:
             result[item] += 1
-    print("result:", result)
+
     return result
