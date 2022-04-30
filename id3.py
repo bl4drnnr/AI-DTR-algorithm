@@ -49,6 +49,10 @@ for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
 # Find information entropy for every found subset
 for attr, value in ALL_POSSIBLE_SUBSETS.items():
     for key, val in value.items():
-        print(key, val)
-        countItems(val)
+        countSubsetInfo = countItems(val)
+        extractedSubsetInfo = []
+        for x, y in countSubsetInfo.items():
+            extractedSubsetInfo.append(y)
+        print("Key:", key)
+        print("Entropy:", informationGain(extractedSubsetInfo))
     print('----------')
