@@ -1,6 +1,7 @@
 import math
 from parser import getData
 INPUT_DATA_LENGTH = len(getData())
+GENERATED_TREE = []
 
 
 def informationGainForClass(gainsPerAttribute, gainsPerAttributeItems):
@@ -24,6 +25,7 @@ def information(X):
 
 def informationEntropy(x, y):
     if x == 0 or y == 0:
+        generateTree()
         return 0
     return -1 * (x/y) * math.log2((x/y))
 
@@ -37,3 +39,11 @@ def countItems(array):
             result[item] += 1
 
     return result
+
+
+def generateTree():
+    return
+
+
+def printTree():
+    return

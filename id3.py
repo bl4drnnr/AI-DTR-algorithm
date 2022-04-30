@@ -5,7 +5,6 @@ DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
 ALL_POSSIBLE_ATTRIBUTES = getAllPossibleAttributes()
 INPUT_DATA_LENGTH = len(DATA)
-GENERATED_TREE = []
 
 # Find information entropy for decision attribute
 recordsPerDecisionAttribute = {}
