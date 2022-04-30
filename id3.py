@@ -22,29 +22,29 @@ for attr, value in recordsPerDecisionAttribute.items():
 CLASSES_INFO_GAIN = informationGain(quantityOfRecordsPerDecisionAttribute)
 
 # Divide input data on subsets by attributes
+ALL_POSSIBLE_SUBSETS_ITEMS = {}
 ALL_POSSIBLE_SUBSETS = {}
-ALL_POSSIBLE_SUBSETS_COPY = {}
 
 for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
     if attr != KEY_ATTRIBUTE:
-        ALL_POSSIBLE_SUBSETS[attr] = value
+        ALL_POSSIBLE_SUBSETS_ITEMS[attr] = value
 
-for attr, value in ALL_POSSIBLE_SUBSETS.items():
+for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
 
     for record in DATA:
         for recAttr, recValue in record.items():
             if attr == recAttr:
 
                 for attrSubset, valueSubset in value.items():
-                    if recValue == valueSubset and ALL_POSSIBLE_SUBSETS_COPY.get(attr) is None:
-                        ALL_POSSIBLE_SUBSETS_COPY[attr] = {}
-                        ALL_POSSIBLE_SUBSETS_COPY[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
-                    elif recValue == valueSubset and ALL_POSSIBLE_SUBSETS_COPY.get(attr) is not None:
-                        if ALL_POSSIBLE_SUBSETS_COPY[attr].get(attrSubset) is None:
-                            ALL_POSSIBLE_SUBSETS_COPY[attr][attrSubset] = {}
-                            ALL_POSSIBLE_SUBSETS_COPY[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
+                    if recValue == valueSubset and ALL_POSSIBLE_SUBSETS.get(attr) is None:
+                        ALL_POSSIBLE_SUBSETS[attr] = {}
+                        ALL_POSSIBLE_SUBSETS[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
+                    elif recValue == valueSubset and ALL_POSSIBLE_SUBSETS.get(attr) is not None:
+                        if ALL_POSSIBLE_SUBSETS[attr].get(attrSubset) is None:
+                            ALL_POSSIBLE_SUBSETS[attr][attrSubset] = {}
+                            ALL_POSSIBLE_SUBSETS[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
                         else:
-                            ALL_POSSIBLE_SUBSETS_COPY[attr][attrSubset].append(record[KEY_ATTRIBUTE])
+                            ALL_POSSIBLE_SUBSETS[attr][attrSubset].append(record[KEY_ATTRIBUTE])
 
-for attr, value in ALL_POSSIBLE_SUBSETS_COPY.items():
+for attr, value in ALL_POSSIBLE_SUBSETS.items():
     print(attr, value)
