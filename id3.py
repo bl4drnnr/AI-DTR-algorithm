@@ -21,3 +21,12 @@ for attr, value in recordsPerDecisionAttribute.items():
 
 CLASSES_INFO_GAIN = informationGain(quantityOfRecordsPerDecisionAttribute)
 
+# Divide input data on subsets by attributes
+print(ALL_POSSIBLE_ATTRIBUTES)
+print()
+for record in DATA:
+    print(record)
+# for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
+#     if attr != KEY_ATTRIBUTE:
+#         for records in DATA:
+

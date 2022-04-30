@@ -13,6 +13,8 @@ def informationGain(X):
         for x in X:
             totalSumOfX += x[0]
             totalSumOfX += x[1]
+        for x in X:
+            infoGain += informationEntropy(x[0] + x[1], totalSumOfX)
 
     return infoGain
 
