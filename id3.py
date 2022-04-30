@@ -59,5 +59,6 @@ for attr, value in ALL_POSSIBLE_SUBSETS.items():
         attributeInfoGainItems.append(informationGain(extractedSubsetInfo))
         extractedSubsetInfoItems.append(extractedSubsetInfo)
     print("Class:", attr)
-    print("Information gain:", informationGainForClass(attributeInfoGainItems, extractedSubsetInfoItems))
+    infoGain = DECISION_CLASSES_INFO_GAIN - informationGainForClass(attributeInfoGainItems, extractedSubsetInfoItems)
+    print("Information gain:", format(infoGain, ".3f"))
 
