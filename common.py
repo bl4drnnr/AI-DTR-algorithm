@@ -1,7 +1,6 @@
 import math
 
 
-# TODO Could information gain be less than 0?
 def informationGain(X):
     infoGain = 0
 
