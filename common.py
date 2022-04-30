@@ -1,4 +1,15 @@
 import math
+from parser import getData
+INPUT_DATA_LENGTH = len(getData())
+
+
+def informationGainForClass(gainsPerAttribute, gainsPerAttributeItems):
+    infoGainForClass = 0
+
+    for x, gain in enumerate(gainsPerAttribute):
+        infoGainForClass += (sum(gainsPerAttributeItems[x])/INPUT_DATA_LENGTH) * gain
+
+    return float(format(infoGainForClass, ".3f"))
 
 
 def informationGain(X):

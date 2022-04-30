@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import informationGain, countItems
+from common import informationGain, informationGainForClass, countItems
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -49,6 +49,7 @@ for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
 # Find information entropy for every found subset
 for attr, value in ALL_POSSIBLE_SUBSETS.items():
     attributeInfoGainItems = []
+    extractedSubsetInfoItems = []
     attributeInfoGain = None
     for key, val in value.items():
         countSubsetInfo = countItems(val)
@@ -56,8 +57,7 @@ for attr, value in ALL_POSSIBLE_SUBSETS.items():
         for x, y in countSubsetInfo.items():
             extractedSubsetInfo.append(y)
         attributeInfoGainItems.append(informationGain(extractedSubsetInfo))
+        extractedSubsetInfoItems.append(extractedSubsetInfo)
     print("Class:", attr)
-    print("attributeInfoGainItems:", attributeInfoGainItems)
-    # TODO CREATE FUNC INFORMATION GAIN FOR CLASSES
-    print("Information gain:", DECISION_CLASSES_INFO_GAIN - informationGain(attributeInfoGainItems))
-    print('----------')
+    print("Information gain:", informationGainForClass(attributeInfoGainItems, extractedSubsetInfoItems))
+
