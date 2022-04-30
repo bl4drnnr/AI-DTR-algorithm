@@ -21,3 +21,14 @@ def informationGain(X):
 
 def informationEntropy(x, y):
     return -1 * (x/y) * math.log2((x/y))
+
+
+def countItems(array):
+    result = {}
+    for item in array:
+        if result.get(item) is None:
+            result[item] = 1
+        else:
+            result[item] += 1
+    print("result:", result)
+    return result

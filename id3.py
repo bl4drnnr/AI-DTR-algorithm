@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import informationGain
+from common import informationGain, countItems
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -46,5 +46,9 @@ for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
                         else:
                             ALL_POSSIBLE_SUBSETS[attr][attrSubset].append(record[KEY_ATTRIBUTE])
 
+# Find information entropy for every found subset
 for attr, value in ALL_POSSIBLE_SUBSETS.items():
-    print(attr, value)
+    for key, val in value.items():
+        print(key, val)
+        countItems(val)
+    print('----------')
