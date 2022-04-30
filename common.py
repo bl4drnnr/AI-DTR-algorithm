@@ -8,7 +8,7 @@ def informationGain(X):
     for x in X:
         infoGain += informationEntropy(x, totalSumOfX)
 
-    return infoGain
+    return float(format(infoGain, ".3f"))
 
 
 def informationEntropy(x, y):
