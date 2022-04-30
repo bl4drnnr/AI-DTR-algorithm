@@ -19,7 +19,7 @@ for record in DATA:
 for attr, value in recordsPerDecisionAttribute.items():
     quantityOfRecordsPerDecisionAttribute.append(value)
 
-CLASSES_INFO_GAIN = informationGain(quantityOfRecordsPerDecisionAttribute)
+DECISION_CLASSES_INFO_GAIN = informationGain(quantityOfRecordsPerDecisionAttribute)
 
 # Divide input data on subsets by attributes
 ALL_POSSIBLE_SUBSETS_ITEMS = {}
@@ -48,11 +48,14 @@ for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
 
 # Find information entropy for every found subset
 for attr, value in ALL_POSSIBLE_SUBSETS.items():
+    attributeInfoGainItems = []
+    attributeInfoGain = None
     for key, val in value.items():
         countSubsetInfo = countItems(val)
         extractedSubsetInfo = []
         for x, y in countSubsetInfo.items():
             extractedSubsetInfo.append(y)
-        print("Key:", key)
-        print("Entropy:", informationGain(extractedSubsetInfo))
+        attributeInfoGainItems.append(informationGain(extractedSubsetInfo))
+    print("Class:", attr)
+    print("Information gain:", informationGain(attributeInfoGainItems))
     print('----------')

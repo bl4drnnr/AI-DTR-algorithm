@@ -2,19 +2,11 @@ import math
 
 
 def informationGain(X):
-    totalSumOfX = 0
     infoGain = 0
 
-    if type(X[0]) is int:
-        totalSumOfX = sum(X)
-        for x in X:
-            infoGain += informationEntropy(x, totalSumOfX)
-    else:
-        for x in X:
-            totalSumOfX += x[0]
-            totalSumOfX += x[1]
-        for x in X:
-            infoGain += informationEntropy(x[0] + x[1], totalSumOfX)
+    totalSumOfX = sum(X)
+    for x in X:
+        infoGain += informationEntropy(x, totalSumOfX)
 
     return infoGain
 
