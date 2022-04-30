@@ -7,9 +7,15 @@ INPUT_DATA_LENGTH = len(DATA)
 GENERATED_TREE = []
 
 # Find information entropy for decision attribute
-quantityOfRecordsPerDecisionAttribute = {}
+recordsPerDecisionAttribute = {}
+quantityOfRecordsPerDecisionAttribute = []
 for record in DATA:
-    if quantityOfRecordsPerDecisionAttribute.get(record[KEY_ATTRIBUTE]) is None:
-        quantityOfRecordsPerDecisionAttribute[record[KEY_ATTRIBUTE]] = 1
+    if recordsPerDecisionAttribute.get(record[KEY_ATTRIBUTE]) is None:
+        recordsPerDecisionAttribute[record[KEY_ATTRIBUTE]] = 1
     else:
-        quantityOfRecordsPerDecisionAttribute[record[KEY_ATTRIBUTE]] += 1
+        recordsPerDecisionAttribute[record[KEY_ATTRIBUTE]] += 1
+
+for attr, value in recordsPerDecisionAttribute.items():
+    quantityOfRecordsPerDecisionAttribute.append(value)
+
+print(quantityOfRecordsPerDecisionAttribute)
