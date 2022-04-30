@@ -12,6 +12,8 @@ def informationGain(X):
 
 
 def informationEntropy(x, y):
+    if x == 0 or y == 0:
+        return 0
     return -1 * (x/y) * math.log2((x/y))
 
 
