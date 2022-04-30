@@ -3,15 +3,19 @@ import math
 
 def informationGain(X):
     totalSumOfX = 0
+    infoGain = 0
 
     if type(X[0]) is int:
         totalSumOfX = sum(X)
-        return informationEntropy(X[0]/totalSumOfX, X[1]/totalSumOfX)
+        for x in X:
+            infoGain += informationEntropy(x, totalSumOfX)
     else:
         for x in X:
             totalSumOfX += x[0]
             totalSumOfX += x[1]
 
+    return infoGain
+
 
 def informationEntropy(x, y):
-    return -1 * x * math.log2(x) - y * math.log2(y)
+    return -1 * (x/y) * math.log2((x/y))

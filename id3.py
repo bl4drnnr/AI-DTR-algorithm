@@ -19,5 +19,5 @@ for record in DATA:
 for attr, value in recordsPerDecisionAttribute.items():
     quantityOfRecordsPerDecisionAttribute.append(value)
 
-print(quantityOfRecordsPerDecisionAttribute)
-informationGain(quantityOfRecordsPerDecisionAttribute)
+CLASSES_INFO_GAIN = informationGain(quantityOfRecordsPerDecisionAttribute)
+
