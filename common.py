@@ -1,12 +1,12 @@
 
-def informationGain():
-    # gain(X) = info(T) - info_x(T)
-    return
+def informationGain(X):
+    totalSumOfX = 0
 
+    if type(X[0]) is int:
+        totalSumOfX = sum(X)
+    else:
+        for x in X:
+            totalSumOfX += x[0]
+            totalSumOfX += x[1]
 
-def informationEntropy():
-    return
-
-
-def informationEntropyX():
     return

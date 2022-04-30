@@ -1,4 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
+from common import informationGain
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -19,3 +20,4 @@ for attr, value in recordsPerDecisionAttribute.items():
     quantityOfRecordsPerDecisionAttribute.append(value)
 
 print(quantityOfRecordsPerDecisionAttribute)
+informationGain(quantityOfRecordsPerDecisionAttribute)
