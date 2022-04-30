@@ -12,7 +12,7 @@ def informationGainForClass(gainsPerAttribute, gainsPerAttributeItems):
     return float(format(infoGainForClass, ".3f"))
 
 
-def informationGain(X):
+def information(X):
     infoGain = 0
 
     totalSumOfX = sum(X)

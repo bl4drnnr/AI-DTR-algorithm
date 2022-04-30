@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import informationGain, informationGainForClass, countItems
+from common import information, informationGainForClass, countItems
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -19,7 +19,7 @@ for record in DATA:
 for attr, value in recordsPerDecisionAttribute.items():
     quantityOfRecordsPerDecisionAttribute.append(value)
 
-DECISION_CLASSES_INFO_GAIN = informationGain(quantityOfRecordsPerDecisionAttribute)
+DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
 
 # Divide input data on subsets by attributes
 ALL_POSSIBLE_SUBSETS_ITEMS = {}
@@ -56,9 +56,10 @@ for attr, value in ALL_POSSIBLE_SUBSETS.items():
         extractedSubsetInfo = []
         for x, y in countSubsetInfo.items():
             extractedSubsetInfo.append(y)
-        attributeInfoGainItems.append(informationGain(extractedSubsetInfo))
+        attributeInfoGainItems.append(information(extractedSubsetInfo))
         extractedSubsetInfoItems.append(extractedSubsetInfo)
     print("Class:", attr)
+    print("Information gain before:", informationGainForClass(attributeInfoGainItems, extractedSubsetInfoItems))
     infoGain = DECISION_CLASSES_INFO_GAIN - informationGainForClass(attributeInfoGainItems, extractedSubsetInfoItems)
     print("Information gain:", format(infoGain, ".3f"))
 
