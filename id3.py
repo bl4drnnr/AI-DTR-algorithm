@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import information, informationGainForClass, countItems
+from common import information, informationGainForClass, countItems, extractTreeData
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -74,10 +74,4 @@ for attr, value in ALL_POSSIBLE_SUBSETS.items():
     attributesInfoGainRes[attr] = {**oneAttributeInfo, 'gain': float(format(infoGain, ".3f"))}
 
 # Generate tree
-gainsList = []
-for attr, value in attributesInfoGainRes.items():
-    gainsList.append(value['gain'])
-    print(attr, value)
-
-print("gainsList:", gainsList)
-print("gainsListMax:", max(gainsList))
+extractTreeData(attributesInfoGainRes)

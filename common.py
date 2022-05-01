@@ -40,6 +40,17 @@ def countItems(array):
     return result
 
 
+def extractTreeData(data):
+    gainsList = []
+    for attr, value in data.items():
+        gainsList.append(value['gain'])
+
+    for attr, value in data.items():
+        if value['gain'] == max(gainsList):
+            print(attr, value)
+    return
+
+
 def generateTree():
     return
 
