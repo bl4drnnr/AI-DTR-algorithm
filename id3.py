@@ -86,5 +86,7 @@ for item in returned[list(returned)[0]]:
 
 print("newSubsetItems:", newSubsetItems)
 
+# TODO Update DATA and start new iteration
+
 # Print tree
 printTree()
