@@ -51,6 +51,7 @@ def extractTreeData(data):
 
 
 def generateTree(node, nextData):
+    attributesToContinue = {node: []}
     GENERATED_TREE.append(node)
 
     # Check if node has generated rule
@@ -67,12 +68,11 @@ def generateTree(node, nextData):
             GENERATED_TREE.append(f"\t-- {attr} -- {sortedNodeData['qor']}")
         elif attr != 'gain' and attr != 'qor':
             GENERATED_TREE.append(f"\t-- {attr} --")
+            attributesToContinue[node].append(attr)
 
-    for attr, value in nextData.items():
-        if attr != node:
-            print(attr, value)
+    return attributesToContinue
 
 
 def printTree():
-    for item in GENERATED_TREE:
-        print(item)
+    for node in GENERATED_TREE:
+        print(node)

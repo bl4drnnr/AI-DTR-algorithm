@@ -75,7 +75,7 @@ for attr, value in ALL_POSSIBLE_SUBSETS.items():
     attributesInfoGainRes[attr] = {**oneAttributeInfo, 'gain': float(format(infoGain, ".3f"))}
 
 # Generate tree
-extractTreeData(attributesInfoGainRes)
+print(extractTreeData(attributesInfoGainRes))
 
 # Print tree
 printTree()
