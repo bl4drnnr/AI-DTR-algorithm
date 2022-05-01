@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import information, informationGainForClass, countItems, extractTreeData, printTree, getAllPossibleSubsets
+from common import information, informationGainForClass, countItems, extractTreeData, printTree, getAllPossibleSubsets, getInformationEntropyPerSubset
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -30,33 +30,7 @@ for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
 ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
 
 # Find information entropy for every found subset
-attributesInfoGainRes = {}
-for attr, value in ALL_POSSIBLE_SUBSETS.items():
-    oneAttributeInfo = {}
-
-    attributesInfoGainItems = []
-    extractedSubsetInfoItems = []
-    attributeInfoGain = None
-
-    for key, val in value.items():
-
-        oneAttributeInfo[key] = 0
-        countSubsetInfo = countItems(val)
-        extractedSubsetInfo = []
-
-        for x, y in countSubsetInfo.items():
-            extractedSubsetInfo.append(y)
-
-        info = information(extractedSubsetInfo)
-
-        oneAttributeInfo[key] = info
-        oneAttributeInfo['qor'] = len(val)
-        attributesInfoGainItems.append(info)
-
-        extractedSubsetInfoItems.append(extractedSubsetInfo)
-
-    infoGain = DECISION_CLASSES_INFO_GAIN - informationGainForClass(attributesInfoGainItems, extractedSubsetInfoItems)
-    attributesInfoGainRes[attr] = {**oneAttributeInfo, 'gain': float(format(infoGain, ".3f"))}
+attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN)
 
 # Generate tree
 returned = extractTreeData(attributesInfoGainRes)

@@ -63,6 +63,37 @@ def getAllPossibleSubsets(data, ALL_POSSIBLE_SUBSETS_ITEMS):
     return allPossibleSubsets
 
 
+def getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN):
+    attributesInfoGainRes = {}
+    for attr, value in ALL_POSSIBLE_SUBSETS.items():
+        oneAttributeInfo = {}
+
+        attributesInfoGainItems = []
+        extractedSubsetInfoItems = []
+
+        for key, val in value.items():
+
+            oneAttributeInfo[key] = 0
+            countSubsetInfo = countItems(val)
+            extractedSubsetInfo = []
+
+            for x, y in countSubsetInfo.items():
+                extractedSubsetInfo.append(y)
+
+            info = information(extractedSubsetInfo)
+
+            oneAttributeInfo[key] = info
+            oneAttributeInfo['qor'] = len(val)
+            attributesInfoGainItems.append(info)
+
+            extractedSubsetInfoItems.append(extractedSubsetInfo)
+
+        infoGain = DECISION_CLASSES_INFO_GAIN - informationGainForClass(attributesInfoGainItems,
+                                                                        extractedSubsetInfoItems)
+        attributesInfoGainRes[attr] = {**oneAttributeInfo, 'gain': float(format(infoGain, ".3f"))}
+    return attributesInfoGainRes
+
+
 def extractTreeData(data):
     gainsList = []
     for attr, value in data.items():
