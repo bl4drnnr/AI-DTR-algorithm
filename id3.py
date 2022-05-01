@@ -28,6 +28,13 @@ for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
     if attr != KEY_ATTRIBUTE:
         ALL_POSSIBLE_SUBSETS_ITEMS[attr] = value
 
+
+def ID3(data, allPossibleSubsets, allPossibleSubsetsItems, decisionClassesInfoGain):
+    possibleSubsets = getAllPossibleSubsets(data, allPossibleSubsetsItems)
+    attributesInfoGainRes = getInformationEntropyPerSubset(possibleSubsets, decisionClassesInfoGain)
+    returned = extractTreeData(attributesInfoGainRes)
+
+
 ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
 
 # Find information entropy for every found subset
@@ -58,11 +65,6 @@ del updatedPossibleSubsets[list(returned)[0]]
 test = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
 t = extractTreeData(test)
 ###################################################################
-
-
-def ID3():
-    return
-
 
 # Print tree
 printTree()
