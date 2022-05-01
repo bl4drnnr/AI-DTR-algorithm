@@ -75,24 +75,7 @@ for record in DATA:
         if record[attr] == value[list(value)[0]]:
             updatedData.append(record)
 
-test = {}
-
-for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
-
-    for record in updatedData:
-        for recAttr, recValue in record.items():
-            if attr == recAttr:
-
-                for attrSubset, valueSubset in value.items():
-                    if recValue == valueSubset and test.get(attr) is None:
-                        test[attr] = {}
-                        test[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
-                    elif recValue == valueSubset and test.get(attr) is not None:
-                        if test[attr].get(attrSubset) is None:
-                            test[attr][attrSubset] = {}
-                            test[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
-                        else:
-                            test[attr][attrSubset].append(record[KEY_ATTRIBUTE])
+updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
 
 # Print tree
 printTree()
