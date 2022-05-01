@@ -122,9 +122,11 @@ def generateTree(node, nextData):
 
     for attr, value in sortedNodeData.items():
         if value == 0 and attr != 'gain' and attr != 'qor':
-            GENERATED_TREE.append(f"{tabulator}-- {attr} -- {sortedNodeData['qor']}")
+            GENERATED_TREE.append(f"{tabulator} -- {attr} -- {sortedNodeData['qor']}")
+            GENERATED_TREE.append(f"{tabulator}|")
         elif attr != 'gain' and attr != 'qor':
-            GENERATED_TREE.append(f"{tabulator}-- {attr} --")
+            GENERATED_TREE.append(f"{tabulator} -- {attr}")
+            GENERATED_TREE.append(f"{tabulator}|")
             attributesToContinue[node].append(attr)
 
     ITERATOR += 1

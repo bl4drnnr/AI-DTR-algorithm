@@ -20,6 +20,7 @@ for attr, value in recordsPerDecisionAttribute.items():
 
 DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
 
+###################################################################
 # Divide input data on subsets by attributes
 ALL_POSSIBLE_SUBSETS_ITEMS = {}
 
@@ -36,6 +37,7 @@ attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DEC
 returned = extractTreeData(attributesInfoGainRes)
 
 # TODO Update DATA [X] and start new iteration []
+###################################################################
 
 newSubsetItems = {list(returned)[0]: {}}
 
@@ -55,6 +57,7 @@ del updatedPossibleSubsets[list(returned)[0]]
 
 test = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
 t = extractTreeData(test)
+###################################################################
 
 
 def ID3():
