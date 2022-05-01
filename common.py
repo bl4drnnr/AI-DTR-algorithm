@@ -47,13 +47,22 @@ def extractTreeData(data):
 
     for attr, value in data.items():
         if value['gain'] == max(gainsList):
+            return generateTree(attr, data)
+
+
+def generateTree(node, nextData):
+    GENERATED_TREE.append(node)
+
+    # Check if node has generated rule
+    for attr, value in nextData[node].items():
+        if value == 0:
+            GENERATED_TREE.append(f"\t -- {attr}")
+
+    for attr, value in nextData.items():
+        if attr != node:
             print(attr, value)
-    return
-
-
-def generateTree():
-    return
 
 
 def printTree():
-    return
+    for item in GENERATED_TREE:
+        print(item)

@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import information, informationGainForClass, countItems, extractTreeData
+from common import information, informationGainForClass, countItems, extractTreeData, printTree
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -75,3 +75,6 @@ for attr, value in ALL_POSSIBLE_SUBSETS.items():
 
 # Generate tree
 extractTreeData(attributesInfoGainRes)
+
+# Print tree
+printTree()
