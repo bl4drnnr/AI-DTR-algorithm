@@ -76,6 +76,10 @@ for record in DATA:
             updatedData.append(record)
 
 updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
+del updatedPossibleSubsets[list(returned)[0]]
+
+for key, value in updatedPossibleSubsets.items():
+    print(key, value)
 
 # Print tree
 printTree()
