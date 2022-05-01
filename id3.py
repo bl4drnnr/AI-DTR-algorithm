@@ -89,7 +89,7 @@ updatedData = []
 for record in DATA:
     for attr, value in newSubsetItems.items():
         if record[attr] == value[list(value)[0]]:
-            print(record)
+            updatedData.append(record)
 
 # Print tree
 printTree()
