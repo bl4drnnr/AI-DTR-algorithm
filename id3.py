@@ -32,6 +32,7 @@ ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
 # Find information entropy for every found subset
 attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN)
 
+# TODO Update DATA [X] and start new iteration []
 # Generate tree
 returned = extractTreeData(attributesInfoGainRes)
 
@@ -42,7 +43,6 @@ for item in returned[list(returned)[0]]:
         if list(returned)[0] == attr:
             newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
 
-# TODO Update DATA [X] and start new iteration []
 updatedData = []
 for record in DATA:
     for attr, value in newSubsetItems.items():
