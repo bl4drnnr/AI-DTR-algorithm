@@ -46,16 +46,38 @@ for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
                             ALL_POSSIBLE_SUBSETS[attr][attrSubset].append(record[KEY_ATTRIBUTE])
 
 # Find information entropy for every found subset
+attributesInfoGainRes = {}
 for attr, value in ALL_POSSIBLE_SUBSETS.items():
-    attributeInfoGainItems = []
+    oneAttributeInfo = {}
+
+    attributesInfoGainItems = []
     extractedSubsetInfoItems = []
     attributeInfoGain = None
+
     for key, val in value.items():
+
+        oneAttributeInfo[key] = 0
         countSubsetInfo = countItems(val)
         extractedSubsetInfo = []
+
         for x, y in countSubsetInfo.items():
             extractedSubsetInfo.append(y)
-        attributeInfoGainItems.append(information(extractedSubsetInfo))
-        extractedSubsetInfoItems.append(extractedSubsetInfo)
-    infoGain = DECISION_CLASSES_INFO_GAIN - informationGainForClass(attributeInfoGainItems, extractedSubsetInfoItems)
 
+        info = information(extractedSubsetInfo)
+
+        oneAttributeInfo[key] = info
+        attributesInfoGainItems.append(info)
+
+        extractedSubsetInfoItems.append(extractedSubsetInfo)
+
+    print("Class:", attr)
+    print("oneAttributeInfo:", oneAttributeInfo)
+
+    infoGain = DECISION_CLASSES_INFO_GAIN - informationGainForClass(attributesInfoGainItems, extractedSubsetInfoItems)
+    attributesInfoGainRes[attr] = {**oneAttributeInfo, 'gain': format(infoGain, ".3f")}
+
+    print("Information gain:", format(infoGain, ".3f"))
+    print('-------------')
+
+# Generate tree
+print("attributesInfoGainRes:", attributesInfoGainRes)

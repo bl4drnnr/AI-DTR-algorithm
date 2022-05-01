@@ -5,6 +5,8 @@ GENERATED_TREE = []
 
 
 def informationGainForClass(gainsPerAttribute, gainsPerAttributeItems):
+    print("gainsPerAttribute:", gainsPerAttribute)
+    print("gainsPerAttributeItems:", gainsPerAttributeItems)
     infoGainForClass = 0
 
     for x, gain in enumerate(gainsPerAttribute):
