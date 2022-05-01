@@ -52,8 +52,8 @@ for record in DATA:
 updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
 del updatedPossibleSubsets[list(returned)[0]]
 
-for key, value in updatedPossibleSubsets.items():
-    print(key, value)
+test = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
+t = extractTreeData(test)
 
 # Print tree
 printTree()
