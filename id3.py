@@ -20,7 +20,6 @@ for attr, value in recordsPerDecisionAttribute.items():
 
 DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
 
-###################################################################
 # Divide input data on subsets by attributes
 ALL_POSSIBLE_SUBSETS_ITEMS = {}
 
@@ -29,11 +28,27 @@ for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
         ALL_POSSIBLE_SUBSETS_ITEMS[attr] = value
 
 
-def ID3(data, allPossibleSubsets, allPossibleSubsetsItems, decisionClassesInfoGain):
+def ID3(data, allPossibleSubsetsItems, decisionClassesInfoGain):
     possibleSubsets = getAllPossibleSubsets(data, allPossibleSubsetsItems)
     attributesInfoGainRes = getInformationEntropyPerSubset(possibleSubsets, decisionClassesInfoGain)
+
     returned = extractTreeData(attributesInfoGainRes)
 
+    newSubsetItems = {list(returned)[0]: {}}
+
+    for item in returned[list(returned)[0]]:
+        for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
+            if list(returned)[0] == attr:
+                newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
+
+    updatedData = []
+    for record in DATA:
+        for attr, value in newSubsetItems.items():
+            if record[attr] == value[list(value)[0]]:
+                updatedData.append(record)
+
+
+# ID3(DATA, ALL_POSSIBLE_SUBSETS_ITEMS, DECISION_CLASSES_INFO_GAIN)
 
 ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
 
@@ -42,9 +57,6 @@ attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DEC
 
 # Generate tree
 returned = extractTreeData(attributesInfoGainRes)
-
-# TODO Update DATA [X] and start new iteration []
-###################################################################
 
 newSubsetItems = {list(returned)[0]: {}}
 
