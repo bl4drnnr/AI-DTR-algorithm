@@ -66,6 +66,7 @@ for attr, value in ALL_POSSIBLE_SUBSETS.items():
         info = information(extractedSubsetInfo)
 
         oneAttributeInfo[key] = info
+        oneAttributeInfo['qor'] = len(val)
         attributesInfoGainItems.append(info)
 
         extractedSubsetInfoItems.append(extractedSubsetInfo)

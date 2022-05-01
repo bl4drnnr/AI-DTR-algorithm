@@ -63,9 +63,9 @@ def generateTree(node, nextData):
                 sortedNodeData[attr] = value
 
     for attr, value in sortedNodeData.items():
-        if value == 0 and attr != 'gain':
-            GENERATED_TREE.append(f"\t-- {attr} -- *records here*")
-        elif attr != 'gain':
+        if value == 0 and attr != 'gain' and attr != 'qor':
+            GENERATED_TREE.append(f"\t-- {attr} -- {sortedNodeData['qor']}")
+        elif attr != 'gain' and attr != 'qor':
             GENERATED_TREE.append(f"\t-- {attr} --")
 
     for attr, value in nextData.items():
