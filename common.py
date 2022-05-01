@@ -55,8 +55,10 @@ def generateTree(node, nextData):
 
     # Check if node has generated rule
     for attr, value in nextData[node].items():
-        if value == 0:
-            GENERATED_TREE.append(f"\t -- {attr}")
+        if value == 0 and attr != 'gain':
+            GENERATED_TREE.append(f"\t -- {attr} -- *records here*")
+        elif attr != 'gain':
+            GENERATED_TREE.append(f"\t -- {attr} --")
 
     for attr, value in nextData.items():
         if attr != node:
