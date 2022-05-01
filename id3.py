@@ -45,9 +45,6 @@ for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
                         else:
                             ALL_POSSIBLE_SUBSETS[attr][attrSubset].append(record[KEY_ATTRIBUTE])
 
-for attr, value in ALL_POSSIBLE_SUBSETS.items():
-    print(attr, value)
-print('----------')
 # Find information entropy for every found subset
 attributesInfoGainRes = {}
 for attr, value in ALL_POSSIBLE_SUBSETS.items():
@@ -113,8 +110,5 @@ for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
                         else:
                             test[attr][attrSubset].append(record[KEY_ATTRIBUTE])
 
-for attr, value in test.items():
-    print(attr, value)
-
 # Print tree
-# printTree()
+printTree()
