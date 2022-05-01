@@ -32,9 +32,10 @@ ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
 # Find information entropy for every found subset
 attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN)
 
-# TODO Update DATA [X] and start new iteration []
 # Generate tree
 returned = extractTreeData(attributesInfoGainRes)
+
+# TODO Update DATA [X] and start new iteration []
 
 newSubsetItems = {list(returned)[0]: {}}
 
@@ -54,6 +55,11 @@ del updatedPossibleSubsets[list(returned)[0]]
 
 test = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
 t = extractTreeData(test)
+
+
+def ID3():
+    return
+
 
 # Print tree
 printTree()
