@@ -28,9 +28,9 @@ for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
         ALL_POSSIBLE_SUBSETS_ITEMS[attr] = value
 
 
-def ID3(data, allPossibleSubsetsItems, decisionClassesInfoGain):
-    possibleSubsets = getAllPossibleSubsets(data, allPossibleSubsetsItems)
-    attributesInfoGainRes = getInformationEntropyPerSubset(possibleSubsets, decisionClassesInfoGain)
+def ID3(data):
+    possibleSubsets = getAllPossibleSubsets(data, ALL_POSSIBLE_SUBSETS_ITEMS)
+    attributesInfoGainRes = getInformationEntropyPerSubset(possibleSubsets, DECISION_CLASSES_INFO_GAIN)
 
     returned = extractTreeData(attributesInfoGainRes)
 
@@ -47,8 +47,12 @@ def ID3(data, allPossibleSubsetsItems, decisionClassesInfoGain):
             if record[attr] == value[list(value)[0]]:
                 updatedData.append(record)
 
+    # TODO Find a way to break this
+    if len(updatedData) != 0:
+        ID3(updatedData)
 
-# ID3(DATA, ALL_POSSIBLE_SUBSETS_ITEMS, DECISION_CLASSES_INFO_GAIN)
+
+# ID3(DATA)
 
 ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
 
@@ -72,11 +76,11 @@ for record in DATA:
             updatedData.append(record)
 
 updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
-del updatedPossibleSubsets[list(returned)[0]]
+# Maybe I shouldn't even do that?
+# del updatedPossibleSubsets[list(returned)[0]]
 
 test = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
 t = extractTreeData(test)
-###################################################################
 
 # Print tree
 printTree()
