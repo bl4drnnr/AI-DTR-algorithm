@@ -2,6 +2,7 @@ import math
 from parser import getData, getKeyAttribute
 INPUT_DATA_LENGTH = len(getData())
 GENERATED_TREE = []
+ITERATOR = 0
 
 
 def informationGainForClass(gainsPerAttribute, gainsPerAttributeItems):
@@ -105,8 +106,10 @@ def extractTreeData(data):
 
 
 def generateTree(node, nextData):
+    global ITERATOR
+    tabulator = '\t' * ITERATOR
     attributesToContinue = {node: []}
-    GENERATED_TREE.append(node)
+    GENERATED_TREE.append(tabulator + node)
 
     # Check if node has generated rule
 
@@ -119,11 +122,12 @@ def generateTree(node, nextData):
 
     for attr, value in sortedNodeData.items():
         if value == 0 and attr != 'gain' and attr != 'qor':
-            GENERATED_TREE.append(f"\t-- {attr} -- {sortedNodeData['qor']}")
+            GENERATED_TREE.append(f"{tabulator}-- {attr} -- {sortedNodeData['qor']}")
         elif attr != 'gain' and attr != 'qor':
-            GENERATED_TREE.append(f"\t-- {attr} --")
+            GENERATED_TREE.append(f"{tabulator}-- {attr} --")
             attributesToContinue[node].append(attr)
 
+    ITERATOR += 1
     return attributesToContinue
 
 

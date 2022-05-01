@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import information, informationGainForClass, countItems, extractTreeData, printTree, getAllPossibleSubsets, getInformationEntropyPerSubset
+from common import information, extractTreeData, printTree, getAllPossibleSubsets, getInformationEntropyPerSubset
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
