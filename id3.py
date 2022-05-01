@@ -84,9 +84,12 @@ for item in returned[list(returned)[0]]:
         if list(returned)[0] == attr:
             newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
 
-print("newSubsetItems:", newSubsetItems)
-
 # TODO Update DATA and start new iteration
+updatedData = []
+for record in DATA:
+    for attr, value in newSubsetItems.items():
+        if record[attr] == value[list(value)[0]]:
+            print(record)
 
 # Print tree
 printTree()
