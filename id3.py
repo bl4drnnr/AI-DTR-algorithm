@@ -24,6 +24,8 @@ DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
 ALL_POSSIBLE_SUBSETS_ITEMS = {}
 ALL_POSSIBLE_SUBSETS = {}
 
+print("ALL_POSSIBLE_ATTRIBUTES:", ALL_POSSIBLE_ATTRIBUTES)
+
 for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
     if attr != KEY_ATTRIBUTE:
         ALL_POSSIBLE_SUBSETS_ITEMS[attr] = value
@@ -75,7 +77,16 @@ for attr, value in ALL_POSSIBLE_SUBSETS.items():
     attributesInfoGainRes[attr] = {**oneAttributeInfo, 'gain': float(format(infoGain, ".3f"))}
 
 # Generate tree
-print(extractTreeData(attributesInfoGainRes))
+returned = extractTreeData(attributesInfoGainRes)
+
+newSubsetItems = {list(returned)[0]: {}}
+
+for item in returned[list(returned)[0]]:
+    for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
+        if list(returned)[0] == attr:
+            newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
+
+print("newSubsetItems:", newSubsetItems)
 
 # Print tree
 printTree()
