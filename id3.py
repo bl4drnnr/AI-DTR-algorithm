@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import information, informationGainForClass, countItems, extractTreeData, printTree
+from common import information, informationGainForClass, countItems, extractTreeData, printTree, getAllPossibleSubsets
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -22,28 +22,12 @@ DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
 
 # Divide input data on subsets by attributes
 ALL_POSSIBLE_SUBSETS_ITEMS = {}
-ALL_POSSIBLE_SUBSETS = {}
 
 for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
     if attr != KEY_ATTRIBUTE:
         ALL_POSSIBLE_SUBSETS_ITEMS[attr] = value
 
-for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
-
-    for record in DATA:
-        for recAttr, recValue in record.items():
-            if attr == recAttr:
-
-                for attrSubset, valueSubset in value.items():
-                    if recValue == valueSubset and ALL_POSSIBLE_SUBSETS.get(attr) is None:
-                        ALL_POSSIBLE_SUBSETS[attr] = {}
-                        ALL_POSSIBLE_SUBSETS[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
-                    elif recValue == valueSubset and ALL_POSSIBLE_SUBSETS.get(attr) is not None:
-                        if ALL_POSSIBLE_SUBSETS[attr].get(attrSubset) is None:
-                            ALL_POSSIBLE_SUBSETS[attr][attrSubset] = {}
-                            ALL_POSSIBLE_SUBSETS[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
-                        else:
-                            ALL_POSSIBLE_SUBSETS[attr][attrSubset].append(record[KEY_ATTRIBUTE])
+ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
 
 # Find information entropy for every found subset
 attributesInfoGainRes = {}
