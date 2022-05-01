@@ -45,6 +45,9 @@ for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
                         else:
                             ALL_POSSIBLE_SUBSETS[attr][attrSubset].append(record[KEY_ATTRIBUTE])
 
+for attr, value in ALL_POSSIBLE_SUBSETS.items():
+    print(attr, value)
+print('----------')
 # Find information entropy for every found subset
 attributesInfoGainRes = {}
 for attr, value in ALL_POSSIBLE_SUBSETS.items():
@@ -84,12 +87,34 @@ for item in returned[list(returned)[0]]:
         if list(returned)[0] == attr:
             newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
 
-# TODO Update DATA and start new iteration
+# TODO Update DATA [X] and start new iteration []
 updatedData = []
 for record in DATA:
     for attr, value in newSubsetItems.items():
         if record[attr] == value[list(value)[0]]:
             updatedData.append(record)
 
+test = {}
+
+for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
+
+    for record in updatedData:
+        for recAttr, recValue in record.items():
+            if attr == recAttr:
+
+                for attrSubset, valueSubset in value.items():
+                    if recValue == valueSubset and test.get(attr) is None:
+                        test[attr] = {}
+                        test[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
+                    elif recValue == valueSubset and test.get(attr) is not None:
+                        if test[attr].get(attrSubset) is None:
+                            test[attr][attrSubset] = {}
+                            test[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
+                        else:
+                            test[attr][attrSubset].append(record[KEY_ATTRIBUTE])
+
+for attr, value in test.items():
+    print(attr, value)
+
 # Print tree
-printTree()
+# printTree()
