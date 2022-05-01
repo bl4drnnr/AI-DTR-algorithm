@@ -70,14 +70,8 @@ for attr, value in ALL_POSSIBLE_SUBSETS.items():
 
         extractedSubsetInfoItems.append(extractedSubsetInfo)
 
-    print("Class:", attr)
-    print("oneAttributeInfo:", oneAttributeInfo)
-
     infoGain = DECISION_CLASSES_INFO_GAIN - informationGainForClass(attributesInfoGainItems, extractedSubsetInfoItems)
     attributesInfoGainRes[attr] = {**oneAttributeInfo, 'gain': format(infoGain, ".3f")}
-
-    print("Information gain:", format(infoGain, ".3f"))
-    print('-------------')
 
 # Generate tree
 print("attributesInfoGainRes:", attributesInfoGainRes)
