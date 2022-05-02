@@ -104,6 +104,7 @@ def ID3(DATA, returned):
         return ID3(updatedData, returned)
 
 
+# Recursive call
 ID3(DATA, returned)
 
 # Print tree
