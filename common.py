@@ -134,5 +134,6 @@ def generateTree(node, nextData):
 
 
 def printTree():
+    # TODO Fix error or bug, where I have on one record in Wiek/Młody (should be 2, not 1)
     for node in GENERATED_TREE[:-1]:
         print(node)
