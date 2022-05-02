@@ -27,13 +27,57 @@ for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
     if attr != KEY_ATTRIBUTE:
         ALL_POSSIBLE_SUBSETS_ITEMS[attr] = value
 
+ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
 
-def ID3(data):
-    possibleSubsets = getAllPossibleSubsets(data, ALL_POSSIBLE_SUBSETS_ITEMS)
-    attributesInfoGainRes = getInformationEntropyPerSubset(possibleSubsets, DECISION_CLASSES_INFO_GAIN)
+# Find information entropy for every found subset
+attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN)
 
-    returned = extractTreeData(attributesInfoGainRes)
+# Generate tree
+returned = extractTreeData(attributesInfoGainRes)
+# ################################################################
+# newSubsetItems = {list(returned)[0]: {}}
+#
+# for item in returned[list(returned)[0]]:
+#     for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
+#         if list(returned)[0] == attr:
+#             newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
+#
+# updatedData = []
+# for record in DATA:
+#     for attr, value in newSubsetItems.items():
+#         if record[attr] == value[list(value)[0]]:
+#             updatedData.append(record)
+#
+# updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
+# # Maybe I shouldn't even do that?
+# # del updatedPossibleSubsets[list(returned)[0]]
+#
+# attributesInfoGainRes = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
+#
+# # Generate tree
+# returned = extractTreeData(attributesInfoGainRes)
+# ################################################################
+# newSubsetItems = {list(returned)[0]: {}}
+#
+# for item in returned[list(returned)[0]]:
+#     for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
+#         if list(returned)[0] == attr:
+#             newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
+#
+# aupdatedData = []
+# for record in updatedData:
+#     for attr, value in newSubsetItems.items():
+#         if record[attr] == value[list(value)[0]]:
+#             aupdatedData.append(record)
+#
+# nupdatedPossibleSubsets = getAllPossibleSubsets(aupdatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
+#
+# asdattributesInfoGainRes = getInformationEntropyPerSubset(nupdatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
+#
+# returned = extractTreeData(asdattributesInfoGainRes)
+################################################################
 
+def ID3(DATA, returned):
     newSubsetItems = {list(returned)[0]: {}}
 
     for item in returned[list(returned)[0]]:
@@ -47,40 +91,22 @@ def ID3(data):
             if record[attr] == value[list(value)[0]]:
                 updatedData.append(record)
 
+    updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
+
+    attributesInfoGainRes = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
+
+    returned = extractTreeData(attributesInfoGainRes)
+    printTree()
+    print(returned)
+    print('----------------------')
+    return ID3(updatedData, returned)
+    # print(len(updatedData))
     # TODO Find a way to break this
-    if len(updatedData) != 0:
-        ID3(updatedData)
+    # if len(updatedData) != 0:
+    #     return ID3(updatedData)
 
 
-# ID3(DATA)
-
-ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
-
-# Find information entropy for every found subset
-attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN)
-
-# Generate tree
-returned = extractTreeData(attributesInfoGainRes)
-
-newSubsetItems = {list(returned)[0]: {}}
-
-for item in returned[list(returned)[0]]:
-    for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
-        if list(returned)[0] == attr:
-            newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
-
-updatedData = []
-for record in DATA:
-    for attr, value in newSubsetItems.items():
-        if record[attr] == value[list(value)[0]]:
-            updatedData.append(record)
-
-updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
-# Maybe I shouldn't even do that?
-# del updatedPossibleSubsets[list(returned)[0]]
-
-test = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
-t = extractTreeData(test)
+ID3(DATA, returned)
 
 # Print tree
 printTree()
