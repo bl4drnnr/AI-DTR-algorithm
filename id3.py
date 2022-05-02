@@ -97,16 +97,11 @@ def ID3(DATA, returned):
     attributesInfoGainRes = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
 
     returned = extractTreeData(attributesInfoGainRes)
-    printTree()
     for attr, value in returned.items():
         if len(value) == 0:
             breakpointTrigger = True
     if not breakpointTrigger:
         return ID3(updatedData, returned)
-    # print(len(updatedData))
-    # TODO Find a way to break this
-    # if len(updatedData) != 0:
-    #     return ID3(updatedData)
 
 
 ID3(DATA, returned)
