@@ -48,14 +48,14 @@ def ID3(data, returnedValue):
     updatedData = []
     for rec in data:
         for key, val in newSubsetItems.items():
-            if record[key] == val[list(val)[0]]:
+            if rec[key] == val[list(val)[0]]:
                 updatedData.append(rec)
 
     updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
 
-    attributesInfoGainRes = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
+    attributesInfoGainResult = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
 
-    returnedData = extractTreeData(attributesInfoGainRes)
+    returnedData = extractTreeData(attributesInfoGainResult)
     for key, val in returnedData.items():
         if len(val) == 0:
             breakpointTrigger = True
