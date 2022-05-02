@@ -134,5 +134,5 @@ def generateTree(node, nextData):
 
 
 def printTree():
-    for node in GENERATED_TREE:
+    for node in GENERATED_TREE[:-1]:
         print(node)
