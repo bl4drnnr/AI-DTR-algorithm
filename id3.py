@@ -79,6 +79,7 @@ returned = extractTreeData(attributesInfoGainRes)
 
 def ID3(DATA, returned):
     newSubsetItems = {list(returned)[0]: {}}
+    breakpointTrigger = False
 
     for item in returned[list(returned)[0]]:
         for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
@@ -97,9 +98,11 @@ def ID3(DATA, returned):
 
     returned = extractTreeData(attributesInfoGainRes)
     printTree()
-    print(returned)
-    print('----------------------')
-    return ID3(updatedData, returned)
+    for attr, value in returned.items():
+        if len(value) == 0:
+            breakpointTrigger = True
+    if not breakpointTrigger:
+        return ID3(updatedData, returned)
     # print(len(updatedData))
     # TODO Find a way to break this
     # if len(updatedData) != 0:
