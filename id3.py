@@ -34,48 +34,7 @@ attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DEC
 
 # Generate tree
 returned = extractTreeData(attributesInfoGainRes)
-# ################################################################
-# newSubsetItems = {list(returned)[0]: {}}
-#
-# for item in returned[list(returned)[0]]:
-#     for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
-#         if list(returned)[0] == attr:
-#             newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
-#
-# updatedData = []
-# for record in DATA:
-#     for attr, value in newSubsetItems.items():
-#         if record[attr] == value[list(value)[0]]:
-#             updatedData.append(record)
-#
-# updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
-# # Maybe I shouldn't even do that?
-# # del updatedPossibleSubsets[list(returned)[0]]
-#
-# attributesInfoGainRes = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
-#
-# # Generate tree
-# returned = extractTreeData(attributesInfoGainRes)
-# ################################################################
-# newSubsetItems = {list(returned)[0]: {}}
-#
-# for item in returned[list(returned)[0]]:
-#     for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
-#         if list(returned)[0] == attr:
-#             newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
-#
-# aupdatedData = []
-# for record in updatedData:
-#     for attr, value in newSubsetItems.items():
-#         if record[attr] == value[list(value)[0]]:
-#             aupdatedData.append(record)
-#
-# nupdatedPossibleSubsets = getAllPossibleSubsets(aupdatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
-#
-# asdattributesInfoGainRes = getInformationEntropyPerSubset(nupdatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
-#
-# returned = extractTreeData(asdattributesInfoGainRes)
-################################################################
+
 
 def ID3(DATA, returned):
     newSubsetItems = {list(returned)[0]: {}}
