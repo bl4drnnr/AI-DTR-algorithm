@@ -36,31 +36,31 @@ attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DEC
 returned = extractTreeData(attributesInfoGainRes)
 
 
-def ID3(DATA, returned):
-    newSubsetItems = {list(returned)[0]: {}}
+def ID3(data, returnedValue):
+    newSubsetItems = {list(returnedValue)[0]: {}}
     breakpointTrigger = False
 
-    for item in returned[list(returned)[0]]:
-        for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
-            if list(returned)[0] == attr:
-                newSubsetItems[list(returned)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[attr][item]
+    for item in returnedValue[list(returnedValue)[0]]:
+        for key, val in ALL_POSSIBLE_ATTRIBUTES.items():
+            if list(returnedValue)[0] == key:
+                newSubsetItems[list(returnedValue)[0]][item] = ALL_POSSIBLE_ATTRIBUTES[key][item]
 
     updatedData = []
-    for record in DATA:
-        for attr, value in newSubsetItems.items():
-            if record[attr] == value[list(value)[0]]:
-                updatedData.append(record)
+    for rec in data:
+        for key, val in newSubsetItems.items():
+            if record[key] == val[list(val)[0]]:
+                updatedData.append(rec)
 
     updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
 
     attributesInfoGainRes = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
 
-    returned = extractTreeData(attributesInfoGainRes)
-    for attr, value in returned.items():
-        if len(value) == 0:
+    returnedData = extractTreeData(attributesInfoGainRes)
+    for key, val in returnedData.items():
+        if len(val) == 0:
             breakpointTrigger = True
     if not breakpointTrigger:
-        return ID3(updatedData, returned)
+        return ID3(updatedData, returnedData)
 
 
 # Recursive call
