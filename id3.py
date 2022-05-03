@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import information, extractTreeData, printTree, getAllPossibleSubsets, getInformationEntropyPerSubset
+from common import information, extractTreeData, printTree, getAllPossibleSubsets, getInformationEntropyPerSubset, updateRecordsPerAttribute
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -7,6 +7,7 @@ ALL_POSSIBLE_ATTRIBUTES = getAllPossibleAttributes()
 INPUT_DATA_LENGTH = len(DATA)
 
 # Find information entropy for decision attribute
+recordsPerDecisionAttribute = updateRecordsPerAttribute()
 recordsPerDecisionAttribute = {}
 quantityOfRecordsPerDecisionAttribute = []
 for record in DATA:

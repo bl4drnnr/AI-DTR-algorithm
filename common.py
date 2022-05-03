@@ -1,5 +1,7 @@
 import math
 from parser import getData, getKeyAttribute
+DATA = getData()
+KEY_ATTRIBUTE = getKeyAttribute()
 INPUT_DATA_LENGTH = len(getData())
 GENERATED_TREE = []
 ITERATOR = 0
@@ -55,13 +57,13 @@ def getAllPossibleSubsets(data, ALL_POSSIBLE_SUBSETS_ITEMS):
                     for attrSubset, valueSubset in value.items():
                         if recValue == valueSubset and allPossibleSubsets.get(attr) is None:
                             allPossibleSubsets[attr] = {}
-                            allPossibleSubsets[attr][attrSubset] = [record[getKeyAttribute()]]
+                            allPossibleSubsets[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
                         elif recValue == valueSubset and allPossibleSubsets.get(attr) is not None:
                             if allPossibleSubsets[attr].get(attrSubset) is None:
                                 allPossibleSubsets[attr][attrSubset] = {}
-                                allPossibleSubsets[attr][attrSubset] = [record[getKeyAttribute()]]
+                                allPossibleSubsets[attr][attrSubset] = [record[KEY_ATTRIBUTE]]
                             else:
-                                allPossibleSubsets[attr][attrSubset].append(record[getKeyAttribute()])
+                                allPossibleSubsets[attr][attrSubset].append(record[KEY_ATTRIBUTE])
 
     return allPossibleSubsets
 
@@ -94,6 +96,21 @@ def getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_G
                                                                         extractedSubsetInfoItems)
         attributesInfoGainRes[attr] = {**oneAttributeInfo, 'gain': float(format(infoGain, ".3f"))}
     return attributesInfoGainRes
+
+
+def updateRecordsPerAttribute():
+    recordsPerDecisionAttribute = {}
+    quantityOfRecordsPerDecisionAttribute = []
+    for record in DATA:
+        if recordsPerDecisionAttribute.get(record[KEY_ATTRIBUTE]) is None:
+            recordsPerDecisionAttribute[record[KEY_ATTRIBUTE]] = 1
+        else:
+            recordsPerDecisionAttribute[record[KEY_ATTRIBUTE]] += 1
+
+    for attr, value in recordsPerDecisionAttribute.items():
+        quantityOfRecordsPerDecisionAttribute.append(value)
+
+    DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
 
 
 def extractTreeData(data):
