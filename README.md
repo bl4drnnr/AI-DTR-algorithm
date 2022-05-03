@@ -33,7 +33,7 @@ Lzawienie
 	 -- tak
 	|
 		Wiek
-		 -- mlody -- 1
+		 -- mlody -- 2
 		|
 		 -- prestarczy -- 1
 		|
