@@ -17,7 +17,7 @@ for record in DATA:
 
 for attr, value in recordsPerDecisionAttribute.items():
     quantityOfRecordsPerDecisionAttribute.append(value)
-
+# TODO Recount gain
 DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
 
 # Divide input data on subsets by attributes
