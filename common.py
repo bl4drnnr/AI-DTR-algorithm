@@ -86,6 +86,7 @@ def getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_G
             info = information(extractedSubsetInfo)
 
             oneAttributeInfo[key] = info
+            # TODO Here is error
             oneAttributeInfo['qor'] = len(val)
             attributesInfoGainItems.append(info)
 
