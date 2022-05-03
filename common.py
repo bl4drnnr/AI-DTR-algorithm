@@ -98,10 +98,10 @@ def getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_G
     return attributesInfoGainRes
 
 
-def updateRecordsPerAttribute():
+def updateRecordsPerAttribute(data):
     recordsPerDecisionAttribute = {}
     quantityOfRecordsPerDecisionAttribute = []
-    for record in DATA:
+    for record in data:
         if recordsPerDecisionAttribute.get(record[KEY_ATTRIBUTE]) is None:
             recordsPerDecisionAttribute[record[KEY_ATTRIBUTE]] = 1
         else:
@@ -110,7 +110,7 @@ def updateRecordsPerAttribute():
     for attr, value in recordsPerDecisionAttribute.items():
         quantityOfRecordsPerDecisionAttribute.append(value)
 
-    DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
+    return information(quantityOfRecordsPerDecisionAttribute)
 
 
 def extractTreeData(data):

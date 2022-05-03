@@ -1,5 +1,5 @@
 from parser import parseInputData, getAllPossibleAttributes, getKeyAttribute
-from common import information, extractTreeData, printTree, getAllPossibleSubsets, getInformationEntropyPerSubset, updateRecordsPerAttribute
+from common import extractTreeData, printTree, getAllPossibleSubsets, getInformationEntropyPerSubset, updateRecordsPerAttribute
 
 DATA = parseInputData()
 KEY_ATTRIBUTE = getKeyAttribute()
@@ -7,19 +7,7 @@ ALL_POSSIBLE_ATTRIBUTES = getAllPossibleAttributes()
 INPUT_DATA_LENGTH = len(DATA)
 
 # Find information entropy for decision attribute
-recordsPerDecisionAttribute = updateRecordsPerAttribute()
-recordsPerDecisionAttribute = {}
-quantityOfRecordsPerDecisionAttribute = []
-for record in DATA:
-    if recordsPerDecisionAttribute.get(record[KEY_ATTRIBUTE]) is None:
-        recordsPerDecisionAttribute[record[KEY_ATTRIBUTE]] = 1
-    else:
-        recordsPerDecisionAttribute[record[KEY_ATTRIBUTE]] += 1
-
-for attr, value in recordsPerDecisionAttribute.items():
-    quantityOfRecordsPerDecisionAttribute.append(value)
-
-DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
+recordsPerDecisionAttribute = updateRecordsPerAttribute(DATA)
 
 # Divide input data on subsets by attributes
 ALL_POSSIBLE_SUBSETS_ITEMS = {}
@@ -31,7 +19,7 @@ for attr, value in ALL_POSSIBLE_ATTRIBUTES.items():
 ALL_POSSIBLE_SUBSETS = getAllPossibleSubsets(DATA, ALL_POSSIBLE_SUBSETS_ITEMS)
 
 # Find information entropy for every found subset
-attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN)
+attributesInfoGainRes = getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, recordsPerDecisionAttribute)
 
 # Generate tree
 returned = extractTreeData(attributesInfoGainRes)
@@ -52,21 +40,11 @@ def ID3(data, returnedValue):
             if rec[key] == val[list(val)[0]]:
                 updatedData.append(rec)
 
-    updatedRecordsPerDecisionAttribute = {}
-    updatedQuantityOfRecordsPerDecisionAttribute = []
-    for rec in updatedData:
-        if updatedRecordsPerDecisionAttribute.get(rec[KEY_ATTRIBUTE]) is None:
-            updatedRecordsPerDecisionAttribute[rec[KEY_ATTRIBUTE]] = 1
-        else:
-            updatedRecordsPerDecisionAttribute[rec[KEY_ATTRIBUTE]] += 1
-
-    for key, val in updatedRecordsPerDecisionAttribute.items():
-        updatedQuantityOfRecordsPerDecisionAttribute.append(val)
-    t = information(updatedQuantityOfRecordsPerDecisionAttribute)
+    updateRecordsPerDecisionAttribute = updateRecordsPerAttribute(updatedData)
 
     updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
 
-    attributesInfoGainResult = getInformationEntropyPerSubset(updatedPossibleSubsets, t)
+    attributesInfoGainResult = getInformationEntropyPerSubset(updatedPossibleSubsets, updateRecordsPerDecisionAttribute)
 
     returnedData = extractTreeData(attributesInfoGainResult)
     for key, val in returnedData.items():
