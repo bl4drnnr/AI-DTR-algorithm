@@ -51,8 +51,6 @@ def ID3(data, returnedValue):
             if rec[key] == val[list(val)[0]]:
                 updatedData.append(rec)
 
-    for item in updatedData:
-        print(item)
     updatedRecordsPerDecisionAttribute = {}
     updatedQuantityOfRecordsPerDecisionAttribute = []
     for rec in updatedData:
@@ -63,12 +61,9 @@ def ID3(data, returnedValue):
 
     for key, val in updatedRecordsPerDecisionAttribute.items():
         updatedQuantityOfRecordsPerDecisionAttribute.append(val)
-    print("updatedRecordsPerDecisionAttribute:", updatedRecordsPerDecisionAttribute)
     t = information(updatedQuantityOfRecordsPerDecisionAttribute)
-    print("t:", t)
 
     updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS, list(returnedValue)[0])
-    print("updatedPossibleSubsets:", updatedPossibleSubsets)
 
     attributesInfoGainResult = getInformationEntropyPerSubset(updatedPossibleSubsets, t)
 
