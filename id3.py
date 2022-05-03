@@ -17,7 +17,7 @@ for record in DATA:
 
 for attr, value in recordsPerDecisionAttribute.items():
     quantityOfRecordsPerDecisionAttribute.append(value)
-# TODO Recount gain
+
 DECISION_CLASSES_INFO_GAIN = information(quantityOfRecordsPerDecisionAttribute)
 
 # Divide input data on subsets by attributes
@@ -51,9 +51,26 @@ def ID3(data, returnedValue):
             if rec[key] == val[list(val)[0]]:
                 updatedData.append(rec)
 
-    updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
+    for item in updatedData:
+        print(item)
+    updatedRecordsPerDecisionAttribute = {}
+    updatedQuantityOfRecordsPerDecisionAttribute = []
+    for rec in updatedData:
+        if updatedRecordsPerDecisionAttribute.get(rec[KEY_ATTRIBUTE]) is None:
+            updatedRecordsPerDecisionAttribute[rec[KEY_ATTRIBUTE]] = 1
+        else:
+            updatedRecordsPerDecisionAttribute[rec[KEY_ATTRIBUTE]] += 1
 
-    attributesInfoGainResult = getInformationEntropyPerSubset(updatedPossibleSubsets, DECISION_CLASSES_INFO_GAIN)
+    for key, val in updatedRecordsPerDecisionAttribute.items():
+        updatedQuantityOfRecordsPerDecisionAttribute.append(val)
+    print("updatedRecordsPerDecisionAttribute:", updatedRecordsPerDecisionAttribute)
+    t = information(updatedQuantityOfRecordsPerDecisionAttribute)
+    print("t:", t)
+
+    updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS, list(returnedValue)[0])
+    print("updatedPossibleSubsets:", updatedPossibleSubsets)
+
+    attributesInfoGainResult = getInformationEntropyPerSubset(updatedPossibleSubsets, t)
 
     returnedData = extractTreeData(attributesInfoGainResult)
     for key, val in returnedData.items():
