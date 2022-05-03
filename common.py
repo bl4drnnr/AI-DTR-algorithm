@@ -67,8 +67,6 @@ def getAllPossibleSubsets(data, ALL_POSSIBLE_SUBSETS_ITEMS):
 
 
 def getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN):
-    print(ALL_POSSIBLE_SUBSETS)
-    print(DECISION_CLASSES_INFO_GAIN)
     attributesInfoGainRes = {}
     for attr, value in ALL_POSSIBLE_SUBSETS.items():
         oneAttributeInfo = {}
@@ -110,9 +108,6 @@ def extractTreeData(data):
 
 
 def generateTree(node, nextData):
-    for attr, value in nextData.items():
-        print(attr, value)
-    print('------------')
     global ITERATOR
     tabulator = '\t' * ITERATOR
     attributesToContinue = {node: []}
