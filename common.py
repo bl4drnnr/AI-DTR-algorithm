@@ -69,13 +69,12 @@ def getAllPossibleSubsets(data, ALL_POSSIBLE_SUBSETS_ITEMS):
 def getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN):
     attributesInfoGainRes = {}
     for attr, value in ALL_POSSIBLE_SUBSETS.items():
-        oneAttributeInfo = {}
+        oneAttributeInfo = {'qor': []}
 
         attributesInfoGainItems = []
         extractedSubsetInfoItems = []
 
         for key, val in value.items():
-
             oneAttributeInfo[key] = 0
             countSubsetInfo = countItems(val)
             extractedSubsetInfo = []
@@ -86,8 +85,7 @@ def getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_G
             info = information(extractedSubsetInfo)
 
             oneAttributeInfo[key] = info
-            # TODO Here is error
-            oneAttributeInfo['qor'] = len(val)
+            oneAttributeInfo['qor'].append({'attribute': key, 'len': len(val)})
             attributesInfoGainItems.append(info)
 
             extractedSubsetInfoItems.append(extractedSubsetInfo)
@@ -114,18 +112,25 @@ def generateTree(node, nextData):
     attributesToContinue = {node: []}
     GENERATED_TREE.append(tabulator + node)
 
-    # Check if node has generated rule
-
     # Sort data in node, just to make it print in right way
     sortedNodeData = {}
-    for item in sorted(nextData[node].values()):
+    for attr, value in nextData[node].items():
+        if attr != 'qor':
+            sortedNodeData[attr] = value
+    sortedNode = {}
+    for item in sorted(sortedNodeData.values()):
         for attr, value in nextData[node].items():
             if item == value:
-                sortedNodeData[attr] = value
+                sortedNode[attr] = value
 
-    for attr, value in sortedNodeData.items():
+    # Print tree
+    for attr, value in sortedNode.items():
+        qor = None
+        for item in nextData[node]['qor']:
+            if item['attribute'] == attr:
+                qor = item['len']
         if value == 0 and attr != 'gain' and attr != 'qor':
-            GENERATED_TREE.append(f"{tabulator} -- {attr} -- {sortedNodeData['qor']}")
+            GENERATED_TREE.append(f"{tabulator} -- {attr} -- {qor}")
             GENERATED_TREE.append(f"{tabulator}|")
         elif attr != 'gain' and attr != 'qor':
             GENERATED_TREE.append(f"{tabulator} -- {attr}")
