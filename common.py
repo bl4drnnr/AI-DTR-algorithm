@@ -44,25 +44,14 @@ def countItems(array):
     return result
 
 
-def getAllPossibleSubsets(data, ALL_POSSIBLE_SUBSETS_ITEMS, ignoreAttribute=None):
+def getAllPossibleSubsets(data, ALL_POSSIBLE_SUBSETS_ITEMS):
     allPossibleSubsets = {}
 
     for attr, value in ALL_POSSIBLE_SUBSETS_ITEMS.items():
         for record in data:
             for recAttr, recValue in record.items():
-                if attr == recAttr and ignoreAttribute is None:
+                if attr == recAttr:
 
-                    for attrSubset, valueSubset in value.items():
-                        if recValue == valueSubset and allPossibleSubsets.get(attr) is None:
-                            allPossibleSubsets[attr] = {}
-                            allPossibleSubsets[attr][attrSubset] = [record[getKeyAttribute()]]
-                        elif recValue == valueSubset and allPossibleSubsets.get(attr) is not None:
-                            if allPossibleSubsets[attr].get(attrSubset) is None:
-                                allPossibleSubsets[attr][attrSubset] = {}
-                                allPossibleSubsets[attr][attrSubset] = [record[getKeyAttribute()]]
-                            else:
-                                allPossibleSubsets[attr][attrSubset].append(record[getKeyAttribute()])
-                elif attr == recAttr and ignoreAttribute != recAttr:
                     for attrSubset, valueSubset in value.items():
                         if recValue == valueSubset and allPossibleSubsets.get(attr) is None:
                             allPossibleSubsets[attr] = {}

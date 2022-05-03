@@ -63,7 +63,7 @@ def ID3(data, returnedValue):
         updatedQuantityOfRecordsPerDecisionAttribute.append(val)
     t = information(updatedQuantityOfRecordsPerDecisionAttribute)
 
-    updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS, list(returnedValue)[0])
+    updatedPossibleSubsets = getAllPossibleSubsets(updatedData, ALL_POSSIBLE_SUBSETS_ITEMS)
 
     attributesInfoGainResult = getInformationEntropyPerSubset(updatedPossibleSubsets, t)
 
