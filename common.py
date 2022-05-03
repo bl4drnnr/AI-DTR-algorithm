@@ -7,9 +7,12 @@ ITERATOR = 0
 
 def informationGainForClass(gainsPerAttribute, gainsPerAttributeItems):
     infoGainForClass = 0
+    quantityOfAllAttributes = 0
+    for item in gainsPerAttributeItems:
+        quantityOfAllAttributes += sum(item)
 
-    for x, gain in enumerate(gainsPerAttribute):
-        infoGainForClass += (sum(gainsPerAttributeItems[x])/INPUT_DATA_LENGTH) * gain
+    for x in range(len(gainsPerAttribute)):
+        infoGainForClass += (sum(gainsPerAttributeItems[x])/quantityOfAllAttributes) * gainsPerAttribute[x]
 
     return float(format(infoGainForClass, ".3f"))
 
@@ -75,6 +78,8 @@ def getAllPossibleSubsets(data, ALL_POSSIBLE_SUBSETS_ITEMS, ignoreAttribute=None
 
 
 def getInformationEntropyPerSubset(ALL_POSSIBLE_SUBSETS, DECISION_CLASSES_INFO_GAIN):
+    print(ALL_POSSIBLE_SUBSETS)
+    print(DECISION_CLASSES_INFO_GAIN)
     attributesInfoGainRes = {}
     for attr, value in ALL_POSSIBLE_SUBSETS.items():
         oneAttributeInfo = {}
