@@ -1,5 +1,9 @@
 # AI-ID3/c4.5-algorithm
 
+### Toolbox
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
 ### Description
 Implementation of ID3/c4.5 tree generating algorithm.
 
